@@ -18,18 +18,16 @@ import { render } from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 
 
-import Master from './components/Master';
-import CreateProduct from './components/CreateProduct';
-import DisplayProduct from './components/DisplayProduct';
-import UpdateProduct from './components/UpdateProduct';
+import Landing from './components/Landing';
+
 
 
 render(
   <Router history={browserHistory}>
-      <Route path="/" component={Master} >
-        <Route path="/add-exam" component={CreateProduct} />
-        <Route path="/pass-test" component={DisplayProduct} />
-        <Route path="/edit/:id" component={UpdateProduct} />
+      <Route path="/" component={Landing} >
+        <Route path="/add-exam" component={Landing} />
+        <Route path="/pass-test" component={Landing} />
+        <Route path="/edit/:id" component={Landing} />
       </Route>
     </Router>,
         document.getElementById('main'));
