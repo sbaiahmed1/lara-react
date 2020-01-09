@@ -19,12 +19,13 @@ import { Router, Route, browserHistory } from 'react-router';
 
 
 import Landing from './components/Landing';
+import AddNewCourse from './components/addNewCourse';
 
 
 
 render(
   <Router history={browserHistory}>
-      <Route path="/" component={Landing} >
+      <Route path="/" component={AddNewCourse} >
         <Route path="/add-exam" component={Landing} />
         <Route path="/pass-test" component={Landing} />
         <Route path="/edit/:id" component={Landing} />
