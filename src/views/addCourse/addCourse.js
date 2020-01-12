@@ -1,29 +1,40 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import addCourseStyle from './addCourseStyle'
 import ButtonAppBar from "../../components/navbar/navbar";
-export default class AddCourse extends Component{
+
+export default class AddCourse extends Component {
     render() {
         return (
             <div>
-            <ButtonAppBar/>
-            <div style={addCourseStyle.formContainer}>
-                <div className="row">
-                    <div className="col s12 m7">
-                        <div className="card">
-                            <div className="card-image">
-                                    <span className="card-title">Card Title</span>
+                <ButtonAppBar/>
+                    <p className="card-title" style={addCourseStyle.uploadCourseTitle}>Upload A course</p>
+                <div style={addCourseStyle.formContainer}>
+                    <div className="row">
+                        <div className="col s12 m7">
+                            <div className="card">
+                                <div className="card-content">
+                                    <input type={'text'}/>
+                                </div>
+                                {/* ---------------------------------------------------*/}
+                                <div style={addCourseStyle.inputContainer}>
+                                <div className="file-field input-field">
+                                    <div className="btn">
+                                        <span>File</span>
+                                        <input type="file"/>
+                                    </div>
+                                    <div className="file-path-wrapper">
+                                        <input className="file-path validate" type="text"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="card-content">
-                                <p>I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.</p>
-                            </div>
-                            <div className="card-action">
-                                <a href="#">This is a link</a>
+                                {/*--------------------------------------*/}
+                                <div className="card-action">
+                                    <button type={'submit'}>Upload</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         );
     }

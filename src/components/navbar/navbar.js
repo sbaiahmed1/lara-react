@@ -6,9 +6,7 @@ import SignedOutLinks from "./signedOutLinks";
 
 
 export default class ButtonAppBar extends Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
         let buttonsControl;
         if (this.props.isLoggedIn=='true'){
