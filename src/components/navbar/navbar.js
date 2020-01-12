@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Link} from 'react-router'
 import SignedInLinks from "./signedInLinks";
 import SignedOutLinks from "./signedOutLinks";
-// import  from './navbarStyle';
 
 
 export default class ButtonAppBar extends Component {

@@ -10,7 +10,8 @@ const addCourseStyle = {
     color:'white'
   },
   inputContainer:{
-    padding :'1%'
+    paddingLeft :'1%',
+    paddingRight:'1%'
   }
 };
 export default addCourseStyle;

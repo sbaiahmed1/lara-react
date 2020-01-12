@@ -3,6 +3,28 @@ import addCourseStyle from './addCourseStyle'
 import ButtonAppBar from "../../components/navbar/navbar";
 
 export default class AddCourse extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            courseName:'',
+            courseDescription:'',
+            fileName:'',
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+
+    }
+    handleSubmit = (e) =>{
+        e.preventDefault();
+        const products = {
+            title: this.state.productTitle,
+            body: this.state.productBody
+        }
+        let uri ='127.0.0.1/api/products';
+        axios.post(uri, products).then((response) => {
+            browserHistory.push('/display-item');
+        });
+
+    }
     render() {
         return (
             <div>
@@ -12,8 +34,13 @@ export default class AddCourse extends Component {
                     <div className="row">
                         <div className="col s12 m7">
                             <div className="card">
-                                <div className="card-content">
-                                    <input type={'text'}/>
+                                <div style={addCourseStyle.inputContainer}>
+                                    <div className="card-content">
+                                        <p className={'center'}>Course Name</p>
+                                        <input type={'text'} style={addCourseStyle.inputContainer} name={'courseName'}/>
+                                        <p className={'center'}>Course Description</p>
+                                        <textarea  className={'materialize-textarea'} name={'courseDescription'}  style={addCourseStyle.inputContainer}/>
+                                    </div>
                                 </div>
                                 {/* ---------------------------------------------------*/}
                                 <div style={addCourseStyle.inputContainer}>
@@ -28,8 +55,10 @@ export default class AddCourse extends Component {
                                 </div>
                             </div>
                                 {/*--------------------------------------*/}
-                                <div className="card-action">
-                                    <button type={'submit'}>Upload</button>
+                                 <div className={'center'}>
+                                     <div className="card-action">
+                                        <button type={'submit'} className="btn center">Upload</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
