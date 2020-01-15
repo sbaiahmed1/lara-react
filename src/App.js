@@ -3,6 +3,7 @@ import {browserHistory, Route, Router} from "react-router";
 import ButtonAppBar from "./components/navbar/navbar";
 import Landing from "./views/landing/landing";
 import AddCourse from "./views/addCourse/addCourse";
+import FileUpload from "./views/addTest/file";
 const background = require('./assets/background.jpg');
 
 export default class App extends Component {
@@ -13,7 +14,7 @@ export default class App extends Component {
                     <Route exact path="/" component={Landing} />
                     <Route path="/add-course" component={AddCourse} />
                     <Route path="/display-item" component={ButtonAppBar} />
-                    <Route path="/edit/:id" component={ButtonAppBar} />
+                    <Route path="/edit" component={FileUpload} />
             </Router>
             </div>
         );

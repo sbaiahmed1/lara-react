@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
 
 class courseController extends Controller
 {
@@ -21,15 +22,15 @@ class courseController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product([
-          'courseName' => $request->get('courseName'),
-          'courseDescription' => $request->get('courseDescription')
-          'coursePath' => $request->get('coursePath')
-        ]);
-        $product->save();
+            $requestData = json_decode($request->getContent(), true);
+//          $product = new Course([
+//          'courseName' => $request->input('courseName'),
+//          'courseDescription' => $request->get('courseDescription'),
+//          'coursePath' => $request->get('coursePath'),
+//        ]);
+            $course = Course::create($requestData);
 
-
-        return response()->json('Course added Successfully.');
+            return response()->json('Course added Successfully.');
     }
 
 

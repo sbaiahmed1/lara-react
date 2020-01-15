@@ -1,36 +1,72 @@
 import React, {Component} from "react";
 import addCourseStyle from './addCourseStyle'
 import ButtonAppBar from "../../components/navbar/navbar";
-import axios from "axios";
+//import {browserHistory} from "react-router";
+import axios from 'axios'
+
 
 export default class AddCourse extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            courseName:'',
-            courseDescription:'',
-            fileName:'',
-        }
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.state = {
+            courseName: '',
+            courseDescription: '',
+            coursePath: '',
+            file: null
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.handleChange = this.handleChange.bind(this)
+
 
     }
-    handleSubmit = (e) =>{
+
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const products = {
-            title: this.state.productTitle,
-            body: this.state.productBody
-        }
-        let uri ='127.0.0.1/api/products';
-        axios.post(uri, products).then((response) => {
-            browserHistory.push('/display-item');
+        let uri = 'http://127.0.0.1:8000/api/courses/store';
+        let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+        const courses = {
+            courseName: this.state.courseName,
+            courseDescription: this.state.courseDescription,
+            coursePath: this.state.coursePath
+        };
+        axios.post(uri, courses, config).then((response) => {
+            console.log(response)
+        }).catch(error => {
+            console.log(error)
         });
+    };
+    // -------------------------------------------------
+    onChange = (e) => {
+        this.setState({file: e.target.files[0]})
+    };
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    };
+    // -------------------------------------------------------------
 
-    }
+    uploadFile = (file) => {
+        const fd = new FormData();
+        fd.append('file', file);
+        const url = 'http://127.0.0.1:8000/api/upload';
+        axios.post(url, fd)
+            .then(response => {
+                console.log(response.request.response)
+                this.setState({
+                    coursePath:response.request.response
+                })
+            })
+            .catch(error => console.log(error))
+    };
+
+
     render() {
         return (
             <div>
                 <ButtonAppBar/>
-                    <p className="card-title" style={addCourseStyle.uploadCourseTitle}>Upload A course</p>
+                <p className="card-title" style={addCourseStyle.uploadCourseTitle}>Upload A course</p>
                 <div style={addCourseStyle.formContainer}>
                     <div className="row">
                         <div className="col s12 m7">
@@ -38,27 +74,31 @@ export default class AddCourse extends Component {
                                 <div style={addCourseStyle.inputContainer}>
                                     <div className="card-content">
                                         <p className={'center'}>Course Name</p>
-                                        <input type={'text'} style={addCourseStyle.inputContainer} name={'courseName'}/>
+                                        <input type={'text'} style={addCourseStyle.inputContainer} name={'courseName'}
+                                               onChange={this.handleChange}/>
                                         <p className={'center'}>Course Description</p>
-                                        <textarea  className={'materialize-textarea'} name={'courseDescription'}  style={addCourseStyle.inputContainer}/>
+                                        <textarea className={'materialize-textarea'} name={'courseDescription'}
+                                                  style={addCourseStyle.inputContainer} onChange={this.handleChange}/>
                                     </div>
                                 </div>
                                 {/* ---------------------------------------------------*/}
                                 <div style={addCourseStyle.inputContainer}>
-                                <div className="file-field input-field">
-                                    <div className="btn">
-                                        <span>File</span>
-                                        <input type="file"/>
-                                    </div>
-                                    <div className="file-path-wrapper">
-                                        <input className="file-path validate" type="text"/>
+                                    <div className="file-field input-field">
+                                        <div className="btn">
+                                            <span>File</span>
+                                            <input type="file" label='Upload' onChange={this.onChange}/>
+                                        </div>
+                                        <div className="file-path-wrapper">
+                                            <input className="file-path validate" type="text"/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                                 {/*--------------------------------------*/}
-                                 <div className={'center'}>
-                                     <div className="card-action">
-                                        <button type={'submit'} className="btn center">Upload</button>
+                                <div className={'center'}>
+                                    <div className="card-action">
+                                        <button type={'submit'} className="btn center"
+                                                onClick={this.handleSubmit}>Upload
+                                        </button>
                                     </div>
                                 </div>
                             </div>
