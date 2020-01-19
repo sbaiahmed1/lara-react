@@ -67,7 +67,7 @@ export default class AddCourse extends Component {
         return (
             <div>
                 <ButtonAppBar/>
-                <p className="card-title" style={addCourseStyle.uploadCourseTitle}>Upload A course</p>
+                <p className="center" style={addCourseStyle.uploadCourseTitle}>Upload A course</p>
                 <div style={addCourseStyle.formContainer}>
                     <div className="row">
                         <div className="col s12 m7">

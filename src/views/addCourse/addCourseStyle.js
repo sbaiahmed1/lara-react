@@ -1,13 +1,14 @@
 const addCourseStyle = {
   formContainer:{
-    padding: '5%',
+    padding: '3%',
     marginLeft:'25%'
   },
   uploadCourseTitle:{
-    marginLeft: '25%',
     marginTop:'5%',
     alignSelf:'Center',
-    color:'white'
+    color:'white',
+    fontSize: '20px',
+    marginLeft: '-4%'
   },
   inputContainer:{
     paddingLeft :'1%',

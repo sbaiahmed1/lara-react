@@ -4,6 +4,8 @@ import ButtonAppBar from "./components/navbar/navbar";
 import Landing from "./views/landing/landing";
 import AddCourse from "./views/addCourse/addCourse";
 import FileUpload from "./views/addTest/file";
+import Login from "./views/login/login";
+import Register from "./views/signup/register";
 const background = require('./assets/background.jpg');
 
 export default class App extends Component {
@@ -15,6 +17,8 @@ export default class App extends Component {
                     <Route path="/add-course" component={AddCourse} />
                     <Route path="/display-item" component={ButtonAppBar} />
                     <Route path="/edit" component={FileUpload} />
+                    <Route path={'/login'} component={Login}/>
+                    <Route path={'/signup'} component={Register}/>
             </Router>
             </div>
         );
