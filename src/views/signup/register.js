@@ -55,9 +55,9 @@ export default class Register extends Component {
         const courses = {
             name: this.state.name,
             lastName: this.state.lastName,
-            password: this.state.password,
             email: this.state.email,
-            type:this.state.type
+            type:this.state.type,
+            password: this.state.password
         };
         axios.post(uri, courses, config).then((response) => {
             console.log(response);
