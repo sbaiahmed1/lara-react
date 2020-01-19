@@ -24,6 +24,9 @@ Route::get('products/{product}', function ($productId) {
 
 Route::post('courses/store','courseController@store');
 
+Route::post('users/create','usersController@store');
+
+
 Route::put('products/{product}', function() {
     return  response()->json([
             'message' => 'Update success'

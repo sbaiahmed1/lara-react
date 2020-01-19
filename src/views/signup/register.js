@@ -14,7 +14,8 @@ export default class Register extends Component {
             c_password: '',
             email: '',
             password_status: '',
-            errorComponent: ''
+            errorComponent: '',
+            type:''
 
         };
         this.verifyPassword = this.verifyPassword.bind(this);
@@ -49,17 +50,18 @@ export default class Register extends Component {
     // --------------------------------------------------------------------------
     handleSubmit = async (e) => {
         e.preventDefault();
-        let uri = 'http://127.0.0.1:8000/api/courses/store';
+        let uri = 'http://127.0.0.1:8000/api/users/create';
         let config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
-        this.uploadFile(this.state.file);
         const courses = {
             name: this.state.name,
             lastName: this.state.lastName,
-            coursePath: this.state.file.name
+            password: this.state.password,
+            email: this.state.email,
+            type:this.state.type
         };
         axios.post(uri, courses, config).then((response) => {
             console.log(response);
-            this.setState({addingStatus: 'Course added successfully 🥰'})
+            this.setState({addingStatus: 'User Created successfully 🥰'})
         }).catch(error => {
             console.log(error);
             this.setState({addingStatus: 'Something went wrong 😕 Try again 😏'})
@@ -67,6 +69,13 @@ export default class Register extends Component {
     };
 
     // ----------------------------------------------------------------------------
+    setType(e) {
+        console.log(e.target.value);
+        this.setState({
+            type:e.target.value,
+        })
+    }
+    // --------------------------------------------------------------------------------
     render() {
         return (
             <div>
@@ -81,7 +90,7 @@ export default class Register extends Component {
                                         <p className={'center'}>First name</p>
                                         <input type={'text'} onChange={this.handleChange}
                                                style={addregisterStyle.inputContainer}
-                                               name={'name'}/>
+                                               name={'name'} required={true}/>
                                         <p className={'center'}>Last name</p>
                                         <input type={'text'} onChange={this.handleChange}
                                                style={addregisterStyle.inputContainer}
@@ -97,13 +106,13 @@ export default class Register extends Component {
                                                onBlur={this.verifyPassword}
                                                style={addregisterStyle.inputContainer}/>
                                         <div className={'center'}>
-                                            <p>
+                                            <p onChange={this.setType.bind(this)}>
                                                 <label>
-                                                    <input className="with-gap" name="group3" type="radio"/>
+                                                    <input className="with-gap" name="group3" type="radio" value={'student'}/>
                                                     <span>Student</span>
                                                 </label>
                                                 <label>
-                                                    <input className="with-gap" name="group3" type="radio"/>
+                                                    <input className="with-gap" name="group3" type="radio" value={'teacher'}/>
                                                     <span>Teacher</span>
                                                 </label>
 
@@ -114,7 +123,7 @@ export default class Register extends Component {
                                 </div>
                                 <div className={'center'}>
                                     <div className="card-action">
-                                        <button type={'submit'} className="btn center">Register</button>
+                                        <button type={'submit'} className="btn center" onClick={this.handleSubmit}>Register</button>
                                     </div>
                                 </div>
                             </div>

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Course;
+use App\Users;
 
-class courseController extends Controller
+class usersController extends Controller
 {
- public function index()
+public function index()
     {
-        $products = Product::all();
-        return response()->json($products);
+        $users = Users::all();
+        return response()->json($users);
     }
 
 
@@ -23,7 +23,7 @@ class courseController extends Controller
     public function store(Request $request)
     {
             $requestData = json_decode($request->getContent(), true);
-            $course = Course::create($requestData);
+            $users = Users::create($requestData);
 
             return response()->json('Course added Successfully.');
     }
@@ -37,8 +37,8 @@ class courseController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        return response()->json($product);
+        $users = Users::find($id);
+        return response()->json($users);
     }
 
 
@@ -51,11 +51,11 @@ class courseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $product->courseName = $request->get('courseName');
-        $product->courseDescription = $request->get('courseDescription');
-        $product->coursePath = $request->get('coursePath');
-        $product->save();
+        $users = Users::find($id);
+        $users->courseName = $request->get('courseName');
+        $users->courseDescription = $request->get('courseDescription');
+        $users->coursePath = $request->get('coursePath');
+        $users->save();
 
 
         return response()->json('Course Updated Successfully.');
@@ -70,7 +70,7 @@ class courseController extends Controller
      */
     public function destroy($id)
     {
-      $product = Product::find($id);
+      $product = Users::find($id);
       $product->delete();
 
 
