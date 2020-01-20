@@ -25,7 +25,7 @@ Route::get('products/{product}', function ($productId) {
 Route::post('courses/store','courseController@store');
 
 Route::post('users/create','usersController@store');
-
+Route::post('users/login','usersController@login');
 
 Route::put('products/{product}', function() {
     return  response()->json([

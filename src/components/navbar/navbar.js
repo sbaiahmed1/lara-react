@@ -8,8 +8,8 @@ export default class ButtonAppBar extends Component {
 
     render() {
         let buttonsControl;
-        if (this.props.isLoggedIn=='true'){
-            buttonsControl = <SignedInLinks/>
+        if (this.props.isLoggedIn===true){
+            buttonsControl = <SignedInLinks creds={this.props.creds}/>
         }
         else {
             buttonsControl = <SignedOutLinks/>

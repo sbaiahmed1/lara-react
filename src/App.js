@@ -19,6 +19,7 @@ export default class App extends Component {
                     <Route path="/edit" component={FileUpload} />
                     <Route path={'/login'} component={Login}/>
                     <Route path={'/signup'} component={Register}/>
+                    <Route path={'/all-courses'} component={}/>
             </Router>
             </div>
         );

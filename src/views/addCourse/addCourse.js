@@ -3,9 +3,12 @@ import addCourseStyle from './addCourseStyle'
 import ButtonAppBar from "../../components/navbar/navbar";
 import {browserHistory} from "react-router";
 import axios from 'axios'
+import {compose} from "redux";
+import {connect} from "react-redux";
 
+const loggedInStudentOrNot =<div className={'center'}><h1>Youre not allowed to be here</h1></div>
 
-export default class AddCourse extends Component {
+class AddCourse extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +16,7 @@ export default class AddCourse extends Component {
             courseDescription: '',
             coursePath: '',
             file: null,
-            addingStatus:''
+            addingStatus: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -32,12 +35,12 @@ export default class AddCourse extends Component {
             courseDescription: this.state.courseDescription,
             coursePath: this.state.file.name
         };
-         axios.post(uri, courses, config).then((response) => {
+        axios.post(uri, courses, config).then((response) => {
             console.log(response);
-            this.setState({addingStatus:'Course added successfully 🥰'})
+            this.setState({addingStatus: 'Course added successfully 🥰'})
         }).catch(error => {
             console.log(error);
-             this.setState({addingStatus:'Something went wrong 😕 Try again 😏'})
+            this.setState({addingStatus: 'Something went wrong 😕 Try again 😏'})
         });
     };
     // -------------------------------------------------
@@ -64,9 +67,8 @@ export default class AddCourse extends Component {
 
 
     render() {
-        return (
+        const loggedInProfessor = (
             <div>
-                <ButtonAppBar/>
                 <p className="center" style={addCourseStyle.uploadCourseTitle}>Upload A course</p>
                 <div style={addCourseStyle.formContainer}>
                     <div className="row">
@@ -111,5 +113,21 @@ export default class AddCourse extends Component {
                 </div>
             </div>
         );
+        let type = this.props.isLogged.type;
+        let isLogged = this.props.isLogged.isLogged;
+        return (
+            <div>
+                <ButtonAppBar isLoggedIn={this.props.isLogged.isLogged} creds={this.props.isLogged.creds}/>
+                {!(type==='teacher'&&isLogged===true)?loggedInStudentOrNot:loggedInProfessor}
+            </div>
+        );
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        isLogged: state.login
+    }
+};
+export default compose(connect(mapStateToProps))(AddCourse);

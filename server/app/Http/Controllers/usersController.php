@@ -76,4 +76,26 @@ public function index()
 
       return response()->json('Course Deleted Successfully.');
     }
+
+    public function login(Request $request){
+
+       $requestData = json_decode($request->getContent(), true);
+       $email= $requestData['email'];
+       $password = $requestData['password'];
+       $userExist = Users::where('email',$email)->where('password',$password)->count();
+       $userType = Users::where('email',$email)->where('password',$password)->first();
+        if($userExist==1){
+        $type=$userType->type;
+        $name=$userType->name;
+        $res_d[] = [
+            'name' => $name,
+            'type'=> $type,
+            'lastName'=>$userType->lastName,
+         ] ;
+        $res=json_encode($res_d);
+        return $res;
+        }
+        else
+        return 'userDoesnt';
+    }
 }

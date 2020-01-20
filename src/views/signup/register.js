@@ -2,15 +2,16 @@ import React, {Component} from "react";
 import addregisterStyle from './addregisterStyle';
 import ButtonAppBar from "../../components/navbar/navbar"
 import axios from "axios";
+import {compose} from "redux";
+import {connect} from "react-redux";
 
-
-export default class Register extends Component {
+ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            lastName: '',
-            password: '',
+            name: null,
+            lastName: null,
+            password: null,
             c_password: '',
             email: '',
             password_status: '',
@@ -26,7 +27,7 @@ export default class Register extends Component {
 
 // --------------------------------------------------------------------------------
     verifyPassword = () => {
-        let password_status;
+
         if (this.state.password !== this.state.c_password) {
             this.setState({
                 password_status: 'Passwords Mismatch',
@@ -119,6 +120,7 @@ export default class Register extends Component {
                                             </p>
                                         </div>
                                         <div>{this.state.errorComponent}</div>
+                                        <div className="center">{this.state.addingStatus}</div>
                                     </div>
                                 </div>
                                 <div className={'center'}>
@@ -134,3 +136,11 @@ export default class Register extends Component {
 
     }
 }
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        isLogged: state.login
+    }
+};
+
+export default compose(connect(mapStateToProps))(Register)
