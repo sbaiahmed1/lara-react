@@ -9,7 +9,7 @@ class courseController extends Controller
 {
  public function index()
     {
-        $products = Product::all();
+        $products = Course::all();
         return response()->json($products);
     }
 
@@ -37,7 +37,7 @@ class courseController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Course::find($id);
         return response()->json($product);
     }
 
@@ -51,7 +51,7 @@ class courseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
+        $product = Course::find($id);
         $product->courseName = $request->get('courseName');
         $product->courseDescription = $request->get('courseDescription');
         $product->coursePath = $request->get('coursePath');
@@ -70,7 +70,7 @@ class courseController extends Controller
      */
     public function destroy($id)
     {
-      $product = Product::find($id);
+      $product = Course::find($id);
       $product->delete();
 
 

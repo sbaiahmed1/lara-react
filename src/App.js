@@ -6,6 +6,7 @@ import AddCourse from "./views/addCourse/addCourse";
 import FileUpload from "./views/addTest/file";
 import Login from "./views/login/login";
 import Register from "./views/signup/register";
+import ViewAllCourses from "./views/viewAllCourses/viewAllCourses";
 const background = require('./assets/background.jpg');
 
 export default class App extends Component {
@@ -19,7 +20,7 @@ export default class App extends Component {
                     <Route path="/edit" component={FileUpload} />
                     <Route path={'/login'} component={Login}/>
                     <Route path={'/signup'} component={Register}/>
-                    <Route path={'/all-courses'} component={}/>
+                    <Route path={'/all-courses'} component={ViewAllCourses}/>
             </Router>
             </div>
         );
